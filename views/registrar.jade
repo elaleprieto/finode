@@ -1,0 +1,70 @@
+extends layout
+
+block content
+	div.row
+		div.col-sm-3
+			div(data-ng-controller=CuentasController)
+				div.row
+					div.col-sm-12
+						| Cuentas
+
+		div.col-sm-9
+			div(data-ng-controller=RegistrosController)
+				div.row
+					div.col-sm-12
+						table.table
+							tbody
+								tr
+									td.col-sm-1
+										| Beneficiario
+									
+									td.col-sm-7
+										input(data-ng-model="registro.beneficiary" type="text").col-sm-12
+									
+									td.col-sm-1
+										| Número
+									
+									td.col-sm-3
+										input(data-ng-model="registro.number" type="text").col-sm-12
+									
+								tr
+									td.col-sm-1
+										| &nbsp;
+									
+									td.col-sm-7
+										| &nbsp;
+									
+									td.col-sm-1
+										| Fecha
+									
+									td.col-sm-3
+										input(data-ng-model="registro.date" type="text").col-sm-12
+								
+								tr
+									td.col-sm-1
+										| Notas
+									
+									td.col-sm-7
+										input(data-ng-model="registro.notes" type="text").col-sm-12
+									
+									td.col-sm-1
+										| Cantidad
+									
+									td.col-sm-3
+										input(data-ng-model="registro.amount" type="text").col-sm-12
+								
+								tr
+									td.col-sm-1
+										| Reconciliado
+									
+									td.col-sm-7
+										input(data-ng-model="registro.reconciled" type="checkbox").col-sm-12
+									
+									td.col-sm-1
+										| &nbsp;
+									
+									td.col-sm-3
+										button.btn.btn-success
+											| Aceptar
+										button.btn.btn-default
+											| Cancelar
