@@ -1,15 +1,23 @@
 extends layout
 
+block scripts
+	script(src='/javascripts/controllers/cuentas_controller.js')
+	script(src='/javascripts/controllers/registros_controller.js')
+
 block content
 	div.row
 		div.col-sm-3
-			div(data-ng-controller=CuentasController)
+			div(data-ng-controller="CuentasController")
 				div.row
 					div.col-sm-12
 						| Cuentas
 
+				div.row(data-ng-repeat="cuenta in cuentas")
+					div.col-sm-12(data-ng-bind="cuenta.name")
+
+
 		div.col-sm-9
-			div(data-ng-controller=RegistrosController)
+			div(data-ng-controller="RegistrosController")
 				div.row
 					div.col-sm-12
 						table.table
@@ -58,13 +66,14 @@ block content
 										| Reconciliado
 									
 									td.col-sm-7
-										input(data-ng-model="registro.reconciled" type="checkbox").col-sm-12
+										input(data-ng-model="registro.reconciled" 
+											data-ng-init="registro.reconciled = false" type="checkbox").col-sm-12
 									
 									td.col-sm-1
 										| &nbsp;
 									
 									td.col-sm-3
-										button.btn.btn-success
+										button.btn.btn-success(data-ng-click="add()")
 											| Aceptar
 										button.btn.btn-default
 											| Cancelar
