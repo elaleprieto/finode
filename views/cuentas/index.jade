@@ -1,0 +1,16 @@
+extends ../layout
+
+block scripts
+	script(src='/javascripts/controllers/cuentas_controller.js')
+	script(src='/javascripts/controllers/registros_controller.js')
+
+block content
+	div.row
+		div.col-sm-3
+			div(data-ng-controller="CuentasController")
+				div.row
+					div.col-sm-12
+						| Cuentas
+
+				div.row(data-ng-repeat="cuenta in cuentas")
+					div.col-sm-12(data-ng-bind="cuenta.name")
