@@ -6,14 +6,51 @@ block scripts
 
 block content
 	div.row
-		div.col-sm-3
-			div(data-ng-controller="CuentasController")
-				div.row
-					div.col-sm-12
-						| Cuentas
+		div.col-sm-3(data-ng-controller="CuentasController")
+			div.row
+				div.col-sm-12
+					| Cuentas
+					<!-- Button trigger modal -->
+					a(class="btn pull-right" data-toggle="modal" data-target="#crearCuenta" title="Crear cuenta")
+						i(class="fa fa-plus-square-o")
 
-				div.row(data-ng-repeat="cuenta in cuentas")
-					div.col-sm-12(data-ng-bind="cuenta.name")
+			div.row(data-ng-repeat="cuenta in cuentas")
+				div.col-sm-12(data-ng-bind="cuenta.name")
+
+			<!-- Modal Crear Cuentas -->
+			div(id="crearCuenta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true").modal.fade
+				div.modal-dialog
+					div.modal-content
+						div.modal-header
+							button(data-dismiss="modal" aria-hidden="true" type="button").close
+								| &times;
+						
+							h4.modal-title#myModalLabel
+								| Crear cuenta
+							
+						div.modal-body
+							form(class="form-horizontal")
+								div.form-group
+									label(class="col-sm-3 control-label")
+										| Nombre
+									div.col-sm-7
+										input(class="form-control" data-ng-model="nuevaCuenta.name")
+								div.form-group
+									label(class="col-sm-3 control-label")
+										| Descripcion
+									div.col-sm-7
+										input(class="form-control" data-ng-model="nuevaCuenta.description")
+								div.form-group
+									label(class="col-sm-3 control-label")
+										| Cuenta Padre
+									div.col-sm-7
+										select(class="form-control" data-ng-model="nuevaCuenta.parent" data-ng-options="c.name for c in cuentas")
+						
+						div.modal-footer
+							button(type="button" class="btn btn-default" data-dismiss="modal")
+								| Cancelar
+							button(type="button" class="btn btn-primary" data-ng-click="add()")
+								| Crear cuenta
 
 
 		div.col-sm-9
@@ -77,3 +114,25 @@ block content
 											| Aceptar
 										button.btn.btn-default
 											| Cancelar
+
+	
+
+	<!-- Modal -->
+	//- div(id="crearCuenta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true").modal.fade
+	//- 	div.modal-dialog
+	//- 		div.modal-content
+	//- 			div.modal-header
+	//- 				button(data-dismiss="modal" aria-hidden="true" type="button").close
+	//- 					| &times;
+				
+	//- 				h4.modal-title#myModalLabel
+	//- 					| Crear cuenta
+					
+	//- 			div.modal-body
+	//- 				select(data-ng-options="cuenta.name for cuenta in cuentas")
+				
+	//- 			div.modal-footer
+	//- 				button(type="button" class="btn btn-default" data-dismiss="modal")
+	//- 					| Cancelar
+	//- 				button(type="button" class="btn btn-primary")
+	//- 					| Crear cuenta

@@ -14,7 +14,7 @@ var path = require('path');
 
 // Variables
 var cache = {};
-var websockets = require('./libs/websocket');
+var websockets = require('./libs/websockets');
 
 var app = express();
 
@@ -55,7 +55,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/registros', registros.registrar);
 app.post('/registros', registros.add);
-app.get('/cuentas', cuentas.find);
+app.get('/cuentas', cuentas.index);
 app.post('/cuentas', cuentas.add);
 app.get('/users', user.list);
 

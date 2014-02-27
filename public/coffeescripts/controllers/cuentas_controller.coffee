@@ -5,14 +5,15 @@ angular.module("App").controller 'CuentasController'
 	$scope.cuentas = Cuenta.query()
 
 	$scope.add = ->
-		console.log $scope.cuenta
+		if $scope.nuevaCuenta? and $scope.nuevaCuenta.name? and $scope.nuevaCuenta.parent?
+			$scope.nuevaCuenta.parent_id = $scope.nuevaCuenta.parent._id
+			socket.emit('cuentaAdd', $scope.nuevaCuenta)
+			$scope.cuentas.push $scope.nuevaCuenta
+			$('#crearCuenta').modal 'hide'
+			$scope.nuevaCuenta = {}
+
 	
 	socket.on 'cuentaAdded', (cuenta) ->
-		# $scope.cuenta = Cuenta.query()
-		# angular.forEach $scope.cuenta, (element) ->
-		# 	if element._id is bichito._id
-		# 		$scope.setColor element, {r: bichito.intensidadRojo, g: bichito.intensidadVerde, b: bichito.intensidadAzul}
-		console.log cuenta
-
+		$scope.cuentas.push cuenta
 
 ]

@@ -4,7 +4,7 @@ module.exports = (grunt) ->
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
-	# Coffee
+		# Coffee
 		coffee: {
 			# compile: {
 				# files: {
@@ -13,6 +13,13 @@ module.exports = (grunt) ->
 					# #'path/to/another.js': ['path/to/sources/*.coffee', 'path/to/more/*.coffee'] # compile and concat into single file
 				# }
 			# }
+			libs: {
+				files: {
+					# 'js/.js': 'path/to/source.coffee', # 1:1 compile
+					'../libs/websockets.js': '../libs/websockets.coffee' # 1:1 compile
+					#'path/to/another.js': ['path/to/sources/*.coffee', 'path/to/more/*.coffee'] # compile and concat into single file
+				}
+			}
 			glob_to_multiple: {
 				expand: true,
 				cwd: 'coffeescripts/',
@@ -21,6 +28,23 @@ module.exports = (grunt) ->
 				ext: '.js'
 			}
 		}
+
+		# libs: {
+			# compile: {
+			# 	files: {
+			# 		# 'js/.js': 'path/to/source.coffee', # 1:1 compile
+			# 		'../libs/websockets.js': '../libs/websockets.coffee' # 1:1 compile
+			# 		#'path/to/another.js': ['path/to/sources/*.coffee', 'path/to/more/*.coffee'] # compile and concat into single file
+			# 	}
+			# }
+			# glob_to_multiple: {
+			# 	expand: true,
+			# 	cwd: 'coffeescripts/',
+			# 	src: ['**/*.coffee'],
+			# 	dest: 'javascripts/',
+			# 	ext: '.js'
+			# }
+		# }
 
 		compass: {
 			dev: {
@@ -39,8 +63,12 @@ module.exports = (grunt) ->
 				tasks: ['compass'],
 			}
 			js: {
-				files: ['coffeescript/**/*.coffee'],
-				tasks: ['coffee'],
+				files: ['coffeescripts/**/*.coffee'],
+				tasks: ['coffee:glob_to_multiple'],
+			}
+			libs: {
+				files: ['../libs/**/*.coffee'],
+				tasks: ['coffee:libs'],
 			}
 		}
 	})
@@ -56,3 +84,4 @@ module.exports = (grunt) ->
 	# grunt.registerTask('default', ['uglify'])
 	grunt.registerTask('default', ['watch'])
 	grunt.registerTask('css', ['compass', 'watch'])
+	grunt.registerTask('libs', ['coffee:libs'])

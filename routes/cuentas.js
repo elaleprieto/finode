@@ -20,12 +20,26 @@ exports.add = function(req, res) {
 	// })
 };
 
-exports.find = function(req, res) {
-	Cuentas.find({}, function (error, cuentas) {
-		if(error) {
-			res.send(error);
-		} else {
-			res.json(cuentas);
-		}
-	});
+exports.index = function(req, res) {
+	if(!req.xhr) {
+		res.render('cuentas/index');
+	} else {
+		Cuentas.find({}, function (error, cuentas) {
+			if(error) {
+				res.send(error);
+			} else {
+				res.json(cuentas);
+			}
+		});
+	}
 };
+
+// exports.find = function(req, res) {
+// 	Cuentas.find({}, function (error, cuentas) {
+// 		if(error) {
+// 			res.send(error);
+// 		} else {
+// 			res.json(cuentas);
+// 		}
+// 	});
+// };
