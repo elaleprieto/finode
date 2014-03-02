@@ -1,12 +1,16 @@
 (function() {
   angular.module("App").controller('RegistrosController', [
     '$scope', '$http', '$timeout', 'socket', 'Registro', function($scope, $http, $timeout, socket, Registro) {
-      console.log('ola');
+      $scope.registros = Registro.query();
       $scope.add = function() {
-        return console.log($scope.registro);
+        if (($scope.registro != null) && ($scope.registro.beneficiary != null) && ($scope.registro.credito_id != null) && ($scope.registro.debito_id != null) && ($scope.registro.amount != null)) {
+          socket.emit('registroAdd', $scope.registro);
+          $scope.registros.push($scope.registro);
+          return $scope.registro = {};
+        }
       };
       return socket.on('registroAdded', function(registro) {
-        return console.log(registro);
+        return $scope.registros.push(registro);
       });
     }
   ]);

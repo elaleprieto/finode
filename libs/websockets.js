@@ -40,9 +40,13 @@
         socket.broadcast.emit('registroAdded', registro);
         return Registros.add(registro);
       });
-      return socket.on('cuentaAdd', function(cuenta) {
+      socket.on('cuentaAdd', function(cuenta) {
         socket.broadcast.emit('cuentaAdded', cuenta);
         return Cuentas.add(cuenta);
+      });
+      return socket.on('registroAdd', function(registro) {
+        socket.broadcast.emit('registroAdded', registro);
+        return Registros.add(registro);
       });
     });
   };

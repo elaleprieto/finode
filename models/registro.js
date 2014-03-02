@@ -113,15 +113,15 @@ Registros.add = function(registro, callback){
 	});
 }
 
-Registros.find = function(callback){
-	Registros.find({}, function (error, registros) {
-		if(error){
-			callback(error)
-		}else{
-			callback(null, registros)
-		}
-	});
-}
+// Registros.find = function(callback){
+// 	Registros.find({}, function (error, registros) {
+// 		if(error){
+// 			callback(error)
+// 		}else{
+// 			callback(null, registros)
+// 		}
+// 	});
+// }
 
 Registros.edit = function(dataRegistro, callback){
 	Registros.findById(dataRegistro.id, function (error, registro) {

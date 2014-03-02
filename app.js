@@ -52,8 +52,9 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-app.get('/registros', registros.registrar);
+// app.get('/', routes.index);
+app.get('/', registros.registrar);
+app.get('/registros', registros.index);
 app.post('/registros', registros.add);
 app.get('/cuentas', cuentas.index);
 app.post('/cuentas', cuentas.add);

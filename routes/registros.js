@@ -19,3 +19,17 @@ exports.add = function(req, res) {
 	// 	res.render('registros/index', {title: 'Listado', registros: registros});
 	// })
 };
+
+exports.index = function(req, res) {
+	if(!req.xhr) {
+		res.render('registros/index');
+	} else {
+		Registros.find({}, function (error, registros) {
+			if(error) {
+				res.send(error);
+			} else {
+				res.json(registros);
+			}
+		});
+	}
+};

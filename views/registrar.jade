@@ -5,8 +5,8 @@ block scripts
 	script(src='/javascripts/controllers/registros_controller.js')
 
 block content
-	div.row
-		div.col-sm-3(data-ng-controller="CuentasController")
+	div.row(data-ng-controller="CuentasController")
+		div.col-sm-3
 			div.row
 				div.col-sm-12
 					| Cuentas
@@ -53,67 +53,79 @@ block content
 								| Crear cuenta
 
 
-		div.col-sm-9
+		.col-sm-9
 			div(data-ng-controller="RegistrosController")
-				div.row
-					div.col-sm-12
-						table.table
-							tbody
-								tr
-									td.col-sm-1
-										| Beneficiario
-									
-									td.col-sm-7
-										input(data-ng-model="registro.beneficiary" type="text").col-sm-12
-									
-									td.col-sm-1
-										| Número
-									
-									td.col-sm-3
-										input(data-ng-model="registro.number" type="text").col-sm-12
-									
-								tr
-									td.col-sm-1
-										| &nbsp;
-									
-									td.col-sm-7
-										| &nbsp;
-									
-									td.col-sm-1
-										| Fecha
-									
-									td.col-sm-3
-										input(data-ng-model="registro.date" type="text").col-sm-12
-								
-								tr
-									td.col-sm-1
-										| Notas
-									
-									td.col-sm-7
-										input(data-ng-model="registro.notes" type="text").col-sm-12
-									
-									td.col-sm-1
-										| Cantidad
-									
-									td.col-sm-3
-										input(data-ng-model="registro.amount" type="text").col-sm-12
-								
-								tr
-									td.col-sm-1
-										| Reconciliado
-									
-									td.col-sm-7
-										input(data-ng-model="registro.reconciled" 
-											data-ng-init="registro.reconciled = false" type="checkbox").col-sm-12
-									
-									td.col-sm-1
-										| &nbsp;
-									
-									td.col-sm-3
-										button.btn.btn-success(data-ng-click="add()")
-											| Aceptar
-										button.btn.btn-default
-											| Cancelar
+				.row
+					.col-sm-12
+						.row(data-ng-repeat="registro in registros")
+							.col-sm-3(data-ng-bind="registro.number")
+							.col-sm-3(data-ng-bind="registro.beneficiary")
+							.col-sm-3(data-ng-bind="registro.amount")
+
+
+				.row
+					.col-sm-12
+						.row
+							.col-sm-1
+								| Beneficiario
+							
+							.col-sm-7
+								input(data-ng-model="registro.beneficiary" type="text").col-sm-12
+							
+							.col-sm-1
+								| Número
+							
+							.col-sm-3
+								input(data-ng-model="registro.number" type="text").col-sm-12
+							
+						.row
+							.col-sm-1
+								| Cuenta Ingreso
+							
+							.col-sm-3
+								select(data-ng-model="registro.credito_id" data-ng-options="cu._id as cu.name for cu in cuentas")
+
+							.col-sm-1
+								| Cuenta Egreso
+							
+							.col-sm-3
+								select(data-ng-model="registro.debito_id" data-ng-options="cu._id as cu.name for cu in cuentas")
+							
+							.col-sm-1
+								| Fecha
+							
+							.col-sm-3
+								input(data-ng-model="registro.date" type="text").col-sm-12
+						
+						.row
+							.col-sm-1
+								| Notas
+							
+							.col-sm-7
+								input(data-ng-model="registro.notes" type="text").col-sm-12
+							
+							.col-sm-1
+								| Cantidad
+							
+							.col-sm-3
+								input(data-ng-model="registro.amount" type="text").col-sm-12
+						
+						.row
+							.col-sm-1
+								| Reconciliado
+							
+							.col-sm-7
+								input(data-ng-model="registro.reconciled" 
+									data-ng-init="registro.reconciled = false" type="checkbox").col-sm-12
+							
+							.col-sm-1
+								| &nbsp;
+							
+							.col-sm-3
+								button.btn.btn-success(data-ng-click="add()")
+									| Aceptar
+								button.btn.btn-default
+									| Cancelar
 
 	
 

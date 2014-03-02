@@ -45,6 +45,10 @@ module.exports = (servidor, cache, Registros) ->
 			Registros.add(registro)
 
 		socket.on 'cuentaAdd', (cuenta) ->
-					socket.broadcast.emit('cuentaAdded', cuenta)
-					Cuentas.add(cuenta)
+			socket.broadcast.emit('cuentaAdded', cuenta)
+			Cuentas.add(cuenta)
+
+		socket.on 'registroAdd', (registro) ->
+			socket.broadcast.emit('registroAdded', registro)
+			Registros.add(registro)
 
