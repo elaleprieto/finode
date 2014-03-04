@@ -52,17 +52,9 @@ block content
 							button(type="button" class="btn btn-primary" data-ng-click="add()")
 								| Crear cuenta
 
-
+		//- East
 		.col-sm-9
 			div(data-ng-controller="RegistrosController")
-				.row
-					.col-sm-12
-						.row(data-ng-repeat="registro in registros")
-							.col-sm-3(data-ng-bind="registro.number")
-							.col-sm-3(data-ng-bind="registro.beneficiary")
-							.col-sm-3(data-ng-bind="registro.amount")
-
-
 				.row
 					.col-sm-12
 						.row
@@ -126,6 +118,26 @@ block content
 									| Aceptar
 								button.btn.btn-default
 									| Cancelar
+				.row
+					.col-sm-12
+						table.table
+							thead
+								tr
+									th Número
+									th Beneficiario
+									th Cantidad
+									th CuentaIN
+									th CuentaEG
+
+							tbody
+								tr(data-ng-repeat="registro in registros")
+									td.col-sm-3(data-ng-bind="registro.number")
+									td.col-sm-3(data-ng-bind="registro.beneficiary")
+									td.col-sm-3(data-ng-bind="registro.amount")
+									td.col-sm-3(data-ng-bind="registro.credito_id")
+									td.col-sm-3(data-ng-bind="registro.debito_id")
+
+
 
 	
 
