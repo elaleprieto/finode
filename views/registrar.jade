@@ -15,7 +15,7 @@ block content
 						i(class="fa fa-plus-square-o")
 
 			div.row(data-ng-repeat="cuenta in cuentas")
-				div.col-sm-12(data-ng-bind="cuenta.name")
+				div.col-sm-12(data-ng-bind="cuenta.name" data-ng-click="cuentaSelected(cuenta)")
 
 			<!-- Modal Crear Cuentas -->
 			div(id="crearCuenta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true").modal.fade
@@ -55,69 +55,134 @@ block content
 		//- East
 		.col-sm-9
 			div(data-ng-controller="RegistrosController")
-				.row
-					.col-sm-12
-						.row
-							.col-sm-1
-								| Beneficiario
-							
-							.col-sm-7
-								input(data-ng-model="registro.beneficiary" type="text").col-sm-12
-							
-							.col-sm-1
-								| Número
-							
-							.col-sm-3
-								input(data-ng-model="registro.number" type="text").col-sm-12
-							
-						.row
-							.col-sm-1
-								| Cuenta Ingreso
-							
-							.col-sm-3
-								select(data-ng-model="registro.credito_id" data-ng-options="cu._id as cu.name for cu in cuentas")
+				ul(class="nav nav-tabs")
+					li(class="active")
+						a(href="#deposito" data-toggle="tab") Deposito
+					li
+						a(href="#retiro" data-toggle="tab") Retiro
 
-							.col-sm-1
-								| Cuenta Egreso
-							
-							.col-sm-3
-								select(data-ng-model="registro.debito_id" data-ng-options="cu._id as cu.name for cu in cuentas")
-							
-							.col-sm-1
-								| Fecha
-							
-							.col-sm-3
-								input(data-ng-model="registro.date" type="text").col-sm-12
-						
+
+				div(class="tab-content")
+					div(class="tab-pane active" id="deposito")
 						.row
-							.col-sm-1
-								| Notas
-							
-							.col-sm-7
-								input(data-ng-model="registro.notes" type="text").col-sm-12
-							
-							.col-sm-1
-								| Cantidad
-							
-							.col-sm-3
-								input(data-ng-model="registro.amount" type="text").col-sm-12
-						
+							.col-sm-12
+								.row
+									.col-sm-1
+										| Beneficiario
+									
+									.col-sm-7
+										input(data-ng-model="registro.beneficiary" type="text").col-sm-12
+									
+									.col-sm-1
+										| Número
+									
+									.col-sm-3
+										input(data-ng-model="registro.number" type="text").col-sm-12
+									
+								.row
+									.col-sm-1
+										| Cuenta
+									
+									.col-sm-7
+										select(data-ng-model="registro.credito_id" data-ng-options="cu._id as cu.name for cu in cuentas")
+
+									.col-sm-1
+										| Fecha
+									
+									.col-sm-3
+										input(data-ng-model="registro.date" type="text").col-sm-12
+								
+								.row
+									.col-sm-1
+										| Notas
+									
+									.col-sm-7
+										input(data-ng-model="registro.notes" type="text").col-sm-12
+									
+									.col-sm-1
+										| Cantidad
+									
+									.col-sm-3
+										input(data-ng-model="registro.amount" type="text").col-sm-12
+								
+								.row
+									.col-sm-1
+										| Reconciliado
+									
+									.col-sm-7
+										input(data-ng-model="registro.reconciled" 
+											data-ng-init="registro.reconciled = false" type="checkbox").col-sm-12
+									
+									.col-sm-1
+										| &nbsp;
+									
+									.col-sm-3
+										button.btn.btn-success(data-ng-click="add()")
+											| Aceptar
+										button.btn.btn-default
+											| Cancelar
+					div(class="tab-pane" id="retiro")
 						.row
-							.col-sm-1
-								| Reconciliado
-							
-							.col-sm-7
-								input(data-ng-model="registro.reconciled" 
-									data-ng-init="registro.reconciled = false" type="checkbox").col-sm-12
-							
-							.col-sm-1
-								| &nbsp;
-							
-							.col-sm-3
-								button.btn.btn-success(data-ng-click="add()")
-									| Aceptar
-								button.btn.btn-default
-									| Cancelar
+							.col-sm-12
+								.row
+									.col-sm-1
+										| Beneficiario
+									
+									.col-sm-7
+										input(data-ng-model="registro.beneficiary" type="text").col-sm-12
+									
+									.col-sm-1
+										| Número
+									
+									.col-sm-3
+										input(data-ng-model="registro.number" type="text").col-sm-12
+									
+								.row
+									.col-sm-1
+										| Cuenta
+									
+									.col-sm-7
+										select(data-ng-model="registro.debito_id" data-ng-options="cu._id as cu.name for cu in cuentas")
+									
+									.col-sm-1
+										| Fecha
+									
+									.col-sm-3
+										input(data-ng-model="registro.date" type="text").col-sm-12
+								
+								.row
+									.col-sm-1
+										| Notas
+									
+									.col-sm-7
+										input(data-ng-model="registro.notes" type="text").col-sm-12
+									
+									.col-sm-1
+										| Cantidad
+									
+									.col-sm-3
+										input(data-ng-model="registro.amount" type="text").col-sm-12
+								
+								.row
+									.col-sm-1
+										| Reconciliado
+									
+									.col-sm-7
+										input(data-ng-model="registro.reconciled" 
+											data-ng-init="registro.reconciled = false" type="checkbox").col-sm-12
+									
+									.col-sm-1
+										| &nbsp;
+									
+									.col-sm-3
+										button.btn.btn-success(data-ng-click="add()")
+											| Aceptar
+										button.btn.btn-default
+											| Cancelar
+
+				
+				
+				//- Listado de cuentas
 				.row
 					.col-sm-12
 						table.table
@@ -125,17 +190,25 @@ block content
 								tr
 									th Número
 									th Beneficiario
+									th Notas
 									th Cantidad
-									th CuentaIN
-									th CuentaEG
+									th Credito
+									th Debito
+									th Total
 
 							tbody
 								tr(data-ng-repeat="registro in registros")
-									td.col-sm-3(data-ng-bind="registro.number")
-									td.col-sm-3(data-ng-bind="registro.beneficiary")
-									td.col-sm-3(data-ng-bind="registro.amount")
-									td.col-sm-3(data-ng-bind="registro.credito_id")
-									td.col-sm-3(data-ng-bind="registro.debito_id")
+									td(data-ng-bind="registro.number")
+									td(data-ng-bind="registro.beneficiary")
+									td(data-ng-bind="registro.notes")
+									td(data-ng-bind="registro.amount")
+									td
+										span(data-ng-bind="registro.amount | currency" 
+											data-ng-show="registro.credito_id == cuentaSelected._id")
+									td
+										span(data-ng-bind="registro.amount | currency" 
+											data-ng-show="registro.debito_id == cuentaSelected._id")
+									td(data-ng-bind="registro.total | currency")
 
 
 

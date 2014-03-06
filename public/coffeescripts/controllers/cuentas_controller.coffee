@@ -12,7 +12,9 @@ angular.module("App").controller 'CuentasController'
 			$('#crearCuenta').modal 'hide'
 			$scope.nuevaCuenta = {}
 
-	
+	$scope.cuentaSelected = (cuenta) ->
+		$scope.$broadcast 'cuentaSelected', cuenta
+
 	socket.on 'cuentaAdded', (cuenta) ->
 		$scope.cuentas.push cuenta
 

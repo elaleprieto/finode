@@ -44,9 +44,19 @@
         socket.broadcast.emit('cuentaAdded', cuenta);
         return Cuentas.add(cuenta);
       });
-      return socket.on('registroAdd', function(registro) {
+      socket.on('registroAdd', function(registro) {
         socket.broadcast.emit('registroAdded', registro);
         return Registros.add(registro);
+      });
+      return socket.on('registrosFindByCuenta', function(cuenta) {
+        console.log(cuenta._id);
+        return Registros.findByCuenta(cuenta, function(error, registos) {
+          if (!error) {
+            return socket.emit('registrosFindByCuenta', registos);
+          } else {
+            return console.log(error);
+          }
+        });
       });
     });
   };

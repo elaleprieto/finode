@@ -108,7 +108,8 @@ Registros.add = function(registro, callback){
 	// 	}
 	// })
 	Registros.create(registro, function (err, small) {
-		if (err) return handleError(err);
+		if (err) return err;
+		if (err) console.log(err);
 		// saved!
 	});
 }
@@ -140,6 +141,23 @@ Registros.edit = function(dataRegistro, callback){
 	
 }
 
+Registros.findByCuenta = function(cuenta, callback) {
+	// Registros.find({debito_id: cuenta._id}, function (error, registros) {
+	return Registros.find(
+		{ $or: [
+				{debito_id: cuenta._id},
+				{credito_id: cuenta._id}
+			]
+		}
+
+		, function (error, registros) {
+			// console.log(registros);
+			if (!error) {callback(null, registros);}
+			else {callback(error)};
+	});
+}
+
+
 SUS.delete = function(id, callback){
 	SUS.subscriptors.remove({_id: this.getObjectId(id)},callback)
 }
@@ -147,4 +165,8 @@ SUS.delete = function(id, callback){
 
 SUS.getObjectId = function(id){
 	return SUS.subscriptors.db.bson_serializer.ObjectID.createFromHexString(id)
+}
+
+Registros.getObjectId = function(id){
+	return ObjectID.createFromHexString(id)
 }

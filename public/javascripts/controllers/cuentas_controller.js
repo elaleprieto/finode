@@ -11,6 +11,9 @@
           return $scope.nuevaCuenta = {};
         }
       };
+      $scope.cuentaSelected = function(cuenta) {
+        return $scope.$broadcast('cuentaSelected', cuenta);
+      };
       return socket.on('cuentaAdded', function(cuenta) {
         return $scope.cuentas.push(cuenta);
       });

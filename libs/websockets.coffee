@@ -51,4 +51,12 @@ module.exports = (servidor, cache, Registros) ->
 		socket.on 'registroAdd', (registro) ->
 			socket.broadcast.emit('registroAdded', registro)
 			Registros.add(registro)
+		
+		socket.on 'registrosFindByCuenta', (cuenta) ->
+			console.log cuenta._id
+			Registros.findByCuenta cuenta, (error, registos) ->
+				if not error
+					socket.emit('registrosFindByCuenta', registos)
+				else 
+					console.log error
 
