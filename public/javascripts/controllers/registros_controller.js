@@ -2,7 +2,6 @@
   angular.module("App").controller('RegistrosController', [
     '$scope', '$http', '$timeout', 'socket', 'Registro', function($scope, $http, $timeout, socket, Registro) {
       var calcularTotales;
-      $scope.registros = Registro.query();
       $scope.cuentaSelected = {};
       $scope.add = function() {
         if (($scope.registro != null) && ($scope.registro.beneficiary != null) && ($scope.registro.credito_id != null) && ($scope.registro.debito_id != null) && ($scope.registro.amount != null)) {
@@ -12,7 +11,6 @@
         }
       };
       $scope.$on('cuentaSelected', function(event, cuenta) {
-        console.log('Cuenta: ', cuenta);
         $scope.cuentaSelected = cuenta;
         return socket.emit('registrosFindByCuenta', cuenta);
       });
@@ -20,7 +18,6 @@
         return $scope.registros.push(registro);
       });
       socket.on('registrosFindByCuenta', function(registros) {
-        console.log('Registros: ', registros);
         $scope.registros = registros;
         return calcularTotales();
       });

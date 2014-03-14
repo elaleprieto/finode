@@ -29,3 +29,18 @@ Directives.directive 'colorSelector', ['$rootScope', ($rootScope) ->
 
 	}
 ]
+
+Directives.directive 'jTreeSelected', ['$rootScope', ($rootScope) ->
+	return {
+		restrict: 'A',
+		# scope: {
+		# 	index: 'bind'
+		# }
+		# template: 'data-jstree="{\'selected\': true}" {{index}}'
+		link: (scope, element, attrs) ->
+			if scope.$first
+				scope.cuentaSelected(scope.cuenta)
+				element.attr("data-jstree", '{"selected":true}')
+
+	}
+]

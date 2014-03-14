@@ -30,4 +30,18 @@
     }
   ]);
 
+  Directives.directive('jTreeSelected', [
+    '$rootScope', function($rootScope) {
+      return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+          if (scope.$first) {
+            scope.cuentaSelected(scope.cuenta);
+            return element.attr("data-jstree", '{"selected":true}');
+          }
+        }
+      };
+    }
+  ]);
+
 }).call(this);

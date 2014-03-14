@@ -1,8 +1,13 @@
 extends layout
 
+block css
+	link(rel='stylesheet', href='/stylesheets/vendors/jsTree.css')
+
 block scripts
 	script(src='/javascripts/controllers/cuentas_controller.js')
 	script(src='/javascripts/controllers/registros_controller.js')
+	script(src='/javascripts/vendors/jstree.min.js')
+	script(src='/javascripts/cuentasTree.js')
 
 block content
 	div.row(data-ng-controller="CuentasController")
@@ -14,8 +19,21 @@ block content
 					a(class="btn pull-right" data-toggle="modal" data-target="#crearCuenta" title="Crear cuenta")
 						i(class="fa fa-plus-square-o")
 
-			div.row(data-ng-repeat="cuenta in cuentas")
-				div.col-sm-12(data-ng-bind="cuenta.name" data-ng-click="cuentaSelected(cuenta)")
+			<!-- div.row(data-ng-repeat="cuenta in cuentas") -->
+			<!-- div.col-sm-12(data-ng-bind="cuenta.name" data-ng-click="cuentaSelected(cuenta)") -->
+
+
+
+			div(data-ng-cloak id="jstree_demo_div")
+			
+			//- div(data-ng-cloak id="jstree_demo_div")
+			//- 	ul
+			//- 		<!-- li(id="root") Root node 1 -->
+			//- 		<!-- li Root node 2 -->
+			//- 		//- li(data-ng-repeat="cuenta in cuentas" data-ng-class="{'jstree-clicked': $first}")
+			//- 		//- li(data-ng-repeat="cuenta in cuentas" data-jstree="{'selected': cuenta.selected}")
+			//- 		li(data-ng-repeat="cuenta in cuentas" j-tree-selected={'index': 1})
+			//- 			| {{cuenta.name}}
 
 			<!-- Modal Crear Cuentas -->
 			div(id="crearCuenta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true").modal.fade

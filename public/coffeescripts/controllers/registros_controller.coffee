@@ -2,7 +2,7 @@ angular.module("App").controller 'RegistrosController'
 	, ['$scope', '$http', '$timeout', 'socket', 'Registro'
 		, ($scope, $http, $timeout, socket, Registro) ->
 
-	$scope.registros = Registro.query()
+	# $scope.registros = Registro.query()
 	$scope.cuentaSelected = {}
 
 	$scope.add = ->
@@ -14,7 +14,6 @@ angular.module("App").controller 'RegistrosController'
 			$scope.registro = {}
 	
 	$scope.$on 'cuentaSelected', (event, cuenta) ->
-		console.log 'Cuenta: ', cuenta
 		$scope.cuentaSelected = cuenta
 		socket.emit('registrosFindByCuenta', cuenta)
 
@@ -22,7 +21,7 @@ angular.module("App").controller 'RegistrosController'
 		$scope.registros.push registro
 
 	socket.on 'registrosFindByCuenta', (registros) ->
-		console.log 'Registros: ', registros
+		# console.log 'Registros: ', registros
 		$scope.registros = registros
 		calcularTotales()
 

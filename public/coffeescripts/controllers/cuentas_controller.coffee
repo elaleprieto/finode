@@ -2,7 +2,39 @@ angular.module("App").controller 'CuentasController'
 	, ['$scope', '$http', '$timeout', 'socket', 'Cuenta'
 		, ($scope, $http, $timeout, socket, Cuenta) ->
 
-	$scope.cuentas = Cuenta.query()
+	Cuenta.query {}
+		, (data) ->
+			# Se elimina el nodo Root y se arman los datos del arbol
+			treeData = []
+			angular.forEach data, (cuenta, index) ->
+				if cuenta.name is 'Root' 
+					# data.splice(index, 1)
+					treeData.push 
+						"id": cuenta._id
+						"parent": '#'
+						"text" : cuenta.name
+				else
+					treeData.push 
+						"id": cuenta._id
+						"parent": cuenta.parent_id
+						"text" : cuenta.name
+						"data": cuenta
+
+			$scope.cuentas = data
+
+			$('#jstree_demo_div').jstree({'core': {'data': treeData}})
+			$('#jstree_demo_div').on "changed.jstree", (e, data) ->
+				cuenta = data.node.data
+				$scope.cuentaSelected(cuenta)
+
+
+			# # Se debe esperar a que estén situados los elementos en la vista para ejecutar jTree
+			# $timeout ->
+			# 	$('#jstree_demo_div').jstree()
+			# 	$('#jstree_demo_div').on "changed.jstree", (e, data) ->
+			# 		cuenta = data.node.data.$scope.cuenta
+			# 		$scope.cuentaSelected(cuenta)
+			# , 50
 
 	$scope.add = ->
 		if $scope.nuevaCuenta? and $scope.nuevaCuenta.name? and $scope.nuevaCuenta.parent?
@@ -17,5 +49,6 @@ angular.module("App").controller 'CuentasController'
 
 	socket.on 'cuentaAdded', (cuenta) ->
 		$scope.cuentas.push cuenta
+
 
 ]
