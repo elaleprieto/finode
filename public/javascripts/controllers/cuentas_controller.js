@@ -41,6 +41,16 @@
           return $scope.nuevaCuenta = {};
         }
       };
+      $scope.excludeCuentaSelected = function(cuentaSelected) {
+        var cuentas;
+        cuentas = angular.copy($scope.cuentas);
+        angular.forEach(cuentas, function(cuenta, index) {
+          if (cuenta._id === cuentaSelected._id) {
+            return cuentas.splice(index, 1);
+          }
+        });
+        return cuentas;
+      };
       $scope.cuentaSelected = function(cuenta) {
         return $scope.$broadcast('cuentaSelected', cuenta);
       };

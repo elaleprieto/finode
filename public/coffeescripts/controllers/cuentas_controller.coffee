@@ -44,6 +44,13 @@ angular.module("App").controller 'CuentasController'
 			$('#crearCuenta').modal 'hide'
 			$scope.nuevaCuenta = {}
 
+	$scope.excludeCuentaSelected = (cuentaSelected) ->
+		cuentas = angular.copy $scope.cuentas
+		angular.forEach cuentas, (cuenta, index) ->
+			if cuenta._id is cuentaSelected._id
+				cuentas.splice index, 1
+		cuentas
+
 	$scope.cuentaSelected = (cuenta) ->
 		$scope.$broadcast 'cuentaSelected', cuenta
 

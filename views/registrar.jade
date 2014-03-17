@@ -102,7 +102,8 @@ block content
 										| Cuenta
 									
 									.col-sm-7
-										select(data-ng-model="registro.credito_id" data-ng-options="cu._id as cu.name for cu in cuentas")
+										select(data-ng-model="registro.credito_id" 
+											data-ng-options="cu._id as cu.name for cu in excludeCuentaSelected(cuentaSelected)")
 
 									.col-sm-1
 										| Fecha
