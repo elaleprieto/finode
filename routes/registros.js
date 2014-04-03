@@ -10,7 +10,7 @@ capitalize = function(string) {
 }
 
 exports.registrar = function(req, res) {
-	res.render('registrar', { title: 'FiNode', user: capitalize(req.session.user) });
+	res.render('registrar', { title: 'FiNode', user: capitalize(req.session.User.name) });
 };
 
 

@@ -58,11 +58,9 @@ if ('development' == app.get('env')) {
 }
 
 function login (req, res, next) {
-	if(req.session && req.session.user) {
-		console.log(req.session);
+	if(req.session && req.session.User) {
 		next();
 	} else {
-		console.log(req.session);
 		res.redirect('/login');
 	}
 }
