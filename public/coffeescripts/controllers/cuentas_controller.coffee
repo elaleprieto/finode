@@ -27,6 +27,12 @@ angular.module("App").controller 'CuentasController'
 				cuenta = data.node.data
 				$scope.cuentaSelected(cuenta)
 
+			# console.log $('#jstree_demo_div').jstree().get_children_dom()
+			$('#jstree_demo_div').on "ready.jstree", (e, data) ->
+				# console.log data
+				console.log $.jstree.reference('#jstree_demo_div').get_next()
+
+
 
 			# # Se debe esperar a que estén situados los elementos en la vista para ejecutar jTree
 			# $timeout ->
@@ -56,6 +62,7 @@ angular.module("App").controller 'CuentasController'
 
 	socket.on 'cuentaAdded', (cuenta) ->
 		$scope.cuentas.push cuenta
+
 
 
 ]

@@ -5,8 +5,12 @@
 
 var Registros = require('../models/registro');
 
+capitalize = function(string) {
+	return string.charAt(0).toUpperCase() + string.substring(1);
+}
+
 exports.registrar = function(req, res) {
-  res.render('registrar', { title: 'FiNode' });
+	res.render('registrar', { title: 'FiNode', user: capitalize(req.session.user) });
 };
 
 

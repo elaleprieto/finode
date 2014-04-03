@@ -1,0 +1,19 @@
+/* line 3, ../../sass/layouts/login.sass */
+html, body {
+  background-color: #abcdef;
+  color: #355359;
+  height: 100%;
+}
+
+/* line 8, ../../sass/layouts/login.sass */
+form {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+/* line 12, ../../sass/layouts/login.sass */
+.container, .container > .row, .container > .row > .col-sm-12 {
+  display: table;
+  height: 100%;
+  width: 100%;
+}

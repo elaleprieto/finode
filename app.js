@@ -44,22 +44,46 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Sesiones
+app.use(express.cookieParser());
+app.use(express.cookieSession({secret: 'ELEFE - Articulos para Ferreterias'}));
+app.use(express.session());
+app.use(app.router);
 
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-// app.get('/', routes.index);
-app.get('/', registros.registrar);
+function login (req, res, next) {
+	if(req.session && req.session.user) {
+		console.log(req.session);
+		next();
+	} else {
+		console.log(req.session);
+		res.redirect('/login');
+	}
+}
+
+app.get('/', login, registros.registrar);
+
+// Registros
 app.get('/registros', registros.index);
 app.post('/registros', registros.add);
+
+// Cuentas
 app.get('/cuentas', cuentas.index);
 app.post('/cuentas', cuentas.add);
-app.get('/users', user.list);
 
+// Users
+app.get('/users', user.list);
+app.get('/login', user.login);
+app.post('/login', user.autenticate);
+app.get('/logout', user.logout);
+
+// Server
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
   websockets(this, cache);

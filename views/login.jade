@@ -1,0 +1,36 @@
+extends layouts/login
+
+block css
+	link(rel='stylesheet', href='/stylesheets/layouts/login.css')
+
+//- block scripts
+
+block content
+	.container
+		.row
+			.col-sm-12
+				form(accept-charset="utf-8" method="post" id="UserLoginForm" role="form" class="form-horizontal" 
+					action="/login")
+
+					<!-- Usuario -->
+					.form-group
+						label(class="col-sm-4 control-label" for="UserUsername") Nombre de Usuario
+						.col-sm-4
+							div(class="input text")
+								input(type="text" id="UserUsername" required="required" 
+									placeholder="Nombre de Usuario" class="form-control" name="username")
+					
+					<!-- Contraseña -->
+					.form-group
+						label(class="col-sm-4 control-label" for="UserPassword") Contraseña
+						.col-sm-4
+							div(class="input password")
+								input(type="password" id="UserPassword" required="required" 
+									placeholder="Contraseña" class="form-control" name="password")
+					
+					<!-- Botones -->
+					.form-group
+						.col-sm-6
+							button(class="btn btn-default col-sm-3 col-sm-offset-9" type="submit") Ingresar
+						.col-sm-6
+							button(class="btn btn-default col-sm-3" type="reset") Cancelar

@@ -1,0 +1,10 @@
+/* line 3, ../../sass/layouts/layout.sass */
+html, body {
+  background-color: #abcdef;
+  color: #355359;
+}
+
+/* line 7, ../../sass/layouts/layout.sass */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}

@@ -26,10 +26,13 @@
             'data': treeData
           }
         });
-        return $('#jstree_demo_div').on("changed.jstree", function(e, data) {
+        $('#jstree_demo_div').on("changed.jstree", function(e, data) {
           var cuenta;
           cuenta = data.node.data;
           return $scope.cuentaSelected(cuenta);
+        });
+        return $('#jstree_demo_div').on("ready.jstree", function(e, data) {
+          return console.log($.jstree.reference('#jstree_demo_div').get_next());
         });
       });
       $scope.add = function() {

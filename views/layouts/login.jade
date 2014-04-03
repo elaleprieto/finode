@@ -1,0 +1,20 @@
+doctype html
+html
+	head
+		title= title
+		link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css')
+		link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css')
+		link(rel='stylesheet', href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css')
+
+		//- link(rel='stylesheet', href='/stylesheets/screen.css')
+		link(rel='stylesheet', href='/stylesheets/layout.css')
+		link(rel='stylesheet', href='/stylesheets/print.css')
+
+		block css
+	
+	body
+		block content
+
+	script(src="https://code.jquery.com/jquery.js")
+	script(src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js")
+	block scripts
